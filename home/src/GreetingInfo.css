@@ -1,0 +1,46 @@
+h1 {
+    font-family: Roboto;
+    font-weight: bold;
+    margin-block-start: 10px;
+    margin-block-end: 10px;
+}
+
+h2 {
+    font-family: Roboto;
+    font-weight: normal;
+    margin-block-start: 10px;
+    margin-block-end: 10px;
+}
+
+p {
+    font-family: Roboto;
+    margin-block-start: 5px;
+    margin-block-end: 10px;
+}
+
+.fa.fa-map-marker{
+    width: 50px;
+    display: inline-block;
+}
+
+.LocationName{
+    display: inline-block;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("C:/Windows/Fonts/Roboto-Light.ttf");
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("C:/Windows/Fonts/Roboto-Regular.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("C:/Windows/Fonts/Roboto-Bold.ttf");
+    font-weight: bold;
+}
