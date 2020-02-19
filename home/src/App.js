@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import GreetingInfo from './GreetingInfo';
+import GreetingInfo from './Components/GreetingInfo/GreetingInfo';
 
 class App extends Component {
   render() {
