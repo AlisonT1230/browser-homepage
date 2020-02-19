@@ -8,7 +8,7 @@ function getCurrentTime() {
     var amOrPm = "am";
 
     if(hour > 12) {
-      hour = hour - 12;
+      hour -= 12;
       amOrPm = "pm";
     }
     
