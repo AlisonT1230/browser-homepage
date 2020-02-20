@@ -1,5 +1,4 @@
-.Background,.LayerOne,.LayerTwo {
-    /* background-color: #ffc48bff; */
+.Background,.LayerOne,.LayerTwo,.LayerThree {
     position: absolute;
     width: 100%;
     height: 100%;

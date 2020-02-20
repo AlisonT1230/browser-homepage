@@ -44,7 +44,8 @@ class Background extends Component {
             time: Date.now(),
             backgroundColor: getLayerColour(date, layers.BACKGROUND),
             layerOneColor: getLayerColour(date, layers.ONE),
-            layerTwoColor: getLayerColour(date, layers.TWO)
+            layerTwoColor: getLayerColour(date, layers.TWO),
+            layerThreeColor: getLayerColour(date, layers.THREE)
         };
     }
 
@@ -68,18 +69,22 @@ class Background extends Component {
             currentTime: newTime,
             backgroundColor: getLayerColour(newTime, layers.BACKGROUND),
             layerOneColor: getLayerColour(newTime, layers.ONE),
-            layerTwoColor: getLayerColour(newTime, layers.TWO)
+            layerTwoColor: getLayerColour(newTime, layers.TWO),
+            layerThreeColor: getLayerColour(newTime, layers.THREE)
         }))
     }
 
     render() {
         return(
             <div className="Background" style={{backgroundColor: this.state.backgroundColor}}>
-                <svg className="LayerOne" viewBox={layerPaths.one.viewBox} style={{fill: this.state.layerOneColor}}>
+                <svg className="LayerOne" viewBox={layerPaths.one.viewBox} style={{fill: this.state.layerOneColor, zIndex:1}}>
                     <path d={layerPaths.one.path}></path>
                 </svg>
-                <svg className="LayerTwo" viewBox={layerPaths.two.viewBox} style={{fill: this.state.layerTwoColor}}>
+                <svg className="LayerTwo" viewBox={layerPaths.two.viewBox} style={{fill: this.state.layerTwoColor, zIndex:2}}>
                     <path d={layerPaths.two.path}></path>
+                </svg>
+                <svg className="LayerThree" viewBox={layerPaths.three.viewBox} style={{fill: this.state.layerThreeColor, zIndex:3}}>
+                    <path d={layerPaths.three.path}></path>
                 </svg>
                 <form>
                     <input id="testTime" type="text"></input>
