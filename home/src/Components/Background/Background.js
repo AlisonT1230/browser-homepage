@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Background.css';
 import {getTransitionColour} from '../../Shared/Utils'
-import {layers, layerColours} from '../../Shared/LayerColours';
+import {layers, layerColours, layerPaths} from '../../Shared/Layers';
 
 function getLayerColour(time, layerName) {
     var endHour = 0;
@@ -38,10 +38,12 @@ function getLayerColour(time, layerName) {
 class Background extends Component {
     constructor(props) {
         super(props);
+        var date = new Date()
         this.state = {
-            currentTime: new Date(),
+            currentTime: date,
             time: Date.now(),
-            backgroundColor: getLayerColour(new Date(), layers.BACKGROUND)
+            backgroundColor: getLayerColour(date, layers.BACKGROUND),
+            layerOneColor: getLayerColour(date, layers.ONE)
         };
     }
 
@@ -63,18 +65,22 @@ class Background extends Component {
         newTime.setHours(time.substr(0, time.indexOf(":")), time.substr(time.indexOf(":") + 1));
         this.setState(state => ({
             currentTime: newTime,
-            backgroundColor: getLayerColour(newTime, layers.BACKGROUND)
+            backgroundColor: getLayerColour(newTime, layers.BACKGROUND),
+            layerOneColor: getLayerColour(newTime, layers.ONE)
         }))
     }
 
     render() {
         return(
             <div className="Background" style={{backgroundColor: this.state.backgroundColor}}>
+                <svg className="LayerOne" viewBox={layerPaths.one.viewBox} style={{fill: this.state.layerOneColor}}>
+                    <path d={layerPaths.one.path}></path>
+                </svg>
                 <form>
                     <input id="testTime" type="text"></input>
                     <input type="button" value="Submit" onClick={e => this.updateTime(document.getElementById("testTime").value)}></input>
                 </form>
-            </div>
+            </div> 
         );
     }
 }
