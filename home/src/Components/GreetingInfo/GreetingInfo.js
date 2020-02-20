@@ -49,28 +49,16 @@ class GreetingInfo extends Component {
 	}
 
 	componentDidMount() {
-		document.addEventListener('keydown', (e) => {
-			if(e.keyCode == 39) {	// Right
-				var cityIndex = this.state.cityIndex;
-				if(this.state.cityIndex == cities.length - 1) {
-					cityIndex = 0;
-				} else {
-					cityIndex++;
-				}
-
-				this.setState({cityIndex: cityIndex});
+		document.getElementsByClassName("LocationName")[0].addEventListener('click', (e) => {
+			var cityIndex = this.state.cityIndex;
+			if(this.state.cityIndex == cities.length - 1) {
+				cityIndex = 0;
+			} else {
+				cityIndex++;
 			}
-			else if(e.keyCode == 37) {	// Left
-				var cityIndex = this.state.cityIndex;
-				if(this.state.cityIndex == 0) {
-					cityIndex = cities.length - 1;
-				} else {
-					cityIndex--;
-				}
 
-				this.setState({cityIndex: cityIndex});
-			}
-		})
+			this.setState({cityIndex: cityIndex});
+		});
 	}
 
 	render() {
