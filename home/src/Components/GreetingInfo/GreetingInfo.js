@@ -3,6 +3,7 @@ import './GreetingInfo.css';
 import 'font-awesome/css/font-awesome.min.css'
 
 const greetings = { MORNING: "Good morning.", AFTERNOON: "Good afternoon.", EVENING: "Good evening." };
+const cities = ["Toronto", "Richmond Hill"];
 
 function getCurrentTime() {
 	var now = new Date();
@@ -40,6 +41,38 @@ function getGreeting() {
 }
 
 class GreetingInfo extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			cityIndex: 0
+		};
+	}
+
+	componentDidMount() {
+		document.addEventListener('keydown', (e) => {
+			if(e.keyCode == 39) {	// Right
+				var cityIndex = this.state.cityIndex;
+				if(this.state.cityIndex == cities.length - 1) {
+					cityIndex = 0;
+				} else {
+					cityIndex++;
+				}
+
+				this.setState({cityIndex: cityIndex});
+			}
+			else if(e.keyCode == 37) {	// Left
+				var cityIndex = this.state.cityIndex;
+				if(this.state.cityIndex == 0) {
+					cityIndex = cities.length - 1;
+				} else {
+					cityIndex--;
+				}
+
+				this.setState({cityIndex: cityIndex});
+			}
+		})
+	}
+
 	render() {
 		return (
 			<div className="GreetingInfo">
@@ -47,7 +80,7 @@ class GreetingInfo extends Component {
 				<h2>It is {getCurrentTime()}.</h2>
 				<div className="Location">
 					<i className="fa fa-map-marker"></i>
-					<p className="LocationName">Toronto</p>
+					<p className="LocationName">{cities[this.state.cityIndex]}</p>
 				</div>
 			</div>
 		)
