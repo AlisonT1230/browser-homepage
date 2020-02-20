@@ -115,10 +115,11 @@ class Background extends Component {
                         layerPaths.five.paths.map((path)=><path d={path}></path>)
                     }
                 </svg>
-                <form>
+                {/* TODO: Remove when done testing */}
+                {/* <form>
                     <input id="testTime" type="text"></input>
                     <input type="button" value="Submit" onClick={e => this.updateTime(document.getElementById("testTime").value)}></input>
-                </form>
+                </form> */}
             </div> 
         );
     }
