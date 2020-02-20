@@ -44,7 +44,8 @@ class GreetingInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cityIndex: 0
+			cityIndex: 0,
+			time: getCurrentTime()
 		};
 	}
 
@@ -59,13 +60,19 @@ class GreetingInfo extends Component {
 
 			this.setState({cityIndex: cityIndex});
 		});
+
+        this.interval = setInterval(() => 
+			{
+				this.setState({time: getCurrentTime()})
+			}
+		, 2000);
 	}
 
 	render() {
 		return (
 			<div className="GreetingInfo">
 				<h1>{getGreeting()}</h1>
-				<h2>It is {getCurrentTime()}.</h2>
+				<h2>It is {this.state.time}.</h2>
 				<div className="Location">
 					<i className="fa fa-map-marker"></i>
 					<p className="LocationName">{cities[this.state.cityIndex]}</p>
