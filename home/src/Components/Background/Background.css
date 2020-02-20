@@ -1,8 +1,12 @@
-.Background,.LayerOne,.LayerTwo,.LayerThree,.LayerFour,.LayerFive {
-    position: absolute;
+.Background{
+    position: fixed;
+    width:100%;
+    height:100%;
+}
+
+.LayerOne,.LayerTwo,.LayerThree,.LayerFour,.LayerFive {
+    position: fixed;
     width: 100%;
-    height: 100%;
-    top: 0;
     left: 0;
     bottom: 0;
     right: 0;
