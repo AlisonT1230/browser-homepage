@@ -53,10 +53,19 @@ class Background extends Component {
 
     componentDidMount () {
         var now = Date.now();
+        var date = new Date();
         this.interval = setInterval(() => 
-            this.setState({
-                time: now
-            }), 5000
+            {
+                this.setState({
+                time: now,
+                currentTime: date,
+                backgroundColor: getLayerColour(date, layers.BACKGROUND),
+                layerOneColor: getLayerColour(date, layers.ONE),
+                layerTwoColor: getLayerColour(date, layers.TWO),
+                layerThreeColor: getLayerColour(date, layers.THREE),
+                layerFourColor: getLayerColour(date, layers.FOUR),
+                layerFiveColor: getLayerColour(date, layers.FIVE)
+            })}, 10000
         );
     }
 
