@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
 import './Background.css';
 import {getTransitionColour} from '../../Shared/Utils'
+import {layers, layerColours} from '../../Shared/LayerColours';
 
-function getBackgroundColour(time) {
+function getLayerColour(time, layerName) {
+    var endHour = 0;
+
     if(time.getHours() < 5) {
-        return "#281f34ff";
+        endHour = 5;
     }
     else if(time.getHours() < 11) {
-        return getTransitionColour(time, 5, 11, {r:40,g:31,b:52}, {r:198,g:222,b:255})
+        endHour = 11;
     }
     else if(time.getHours() < 15) {
-        return "#c6deffff";
+        endHour = 15;
     }
     else if(time.getHours() < 17) {
-        return getTransitionColour(time, 15, 17, {r:198,g:222,b:255}, {r:255,g:196,b:139})
+        endHour = 17;
     }
     else if(time.getHours() < 20) {
-       return getTransitionColour(time, 17, 20, {r:255,g:196,b:139}, {r:40,g:31,b:52})
+        endHour = 20;
     }
-    else {
-        return "#281f34ff";
+    else if(time.getHours()< 24){
+        endHour = 24;
+    }
+
+    var colourInfo = layerColours[layerName][endHour];
+    if(colourInfo.isTransitionHour) {
+        var transition = colourInfo.transition
+        return getTransitionColour(time, transition.startTime, transition.endTime, transition.startColour, transition.endColour);
+    } else {
+        // If not transition hour, transition is the colour
+        return colourInfo.transition;
     }
 }
 
@@ -29,7 +41,7 @@ class Background extends Component {
         this.state = {
             currentTime: new Date(),
             time: Date.now(),
-            backgroundColor: getBackgroundColour(new Date())
+            backgroundColor: getLayerColour(new Date(), layers.BACKGROUND)
         };
     }
 
@@ -51,7 +63,7 @@ class Background extends Component {
         newTime.setHours(time.substr(0, time.indexOf(":")), time.substr(time.indexOf(":") + 1));
         this.setState(state => ({
             currentTime: newTime,
-            backgroundColor: getBackgroundColour(newTime)
+            backgroundColor: getLayerColour(newTime, layers.BACKGROUND)
         }))
     }
 
