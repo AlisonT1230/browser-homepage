@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Background.css';
 import {getTransitionColour} from '../../Shared/Utils'
-import {layers, layerColours} from '../../Shared/LayerColours';
+import {layers, layerColours, layerPaths} from '../../Shared/Layers';
 
 function getLayerColour(time, layerName) {
     var endHour = 0;
@@ -38,19 +38,34 @@ function getLayerColour(time, layerName) {
 class Background extends Component {
     constructor(props) {
         super(props);
+        var date = new Date()
         this.state = {
-            currentTime: new Date(),
+            currentTime: date,
             time: Date.now(),
-            backgroundColor: getLayerColour(new Date(), layers.BACKGROUND)
+            backgroundColor: getLayerColour(date, layers.BACKGROUND),
+            layerOneColor: getLayerColour(date, layers.ONE),
+            layerTwoColor: getLayerColour(date, layers.TWO),
+            layerThreeColor: getLayerColour(date, layers.THREE),
+            layerFourColor: getLayerColour(date, layers.FOUR),
+            layerFiveColor: getLayerColour(date, layers.FIVE)
         };
     }
 
     componentDidMount () {
         var now = Date.now();
+        var date = new Date();
         this.interval = setInterval(() => 
-            this.setState({
-                time: now
-            }), 5000
+            {
+                this.setState({
+                time: now,
+                currentTime: date,
+                backgroundColor: getLayerColour(date, layers.BACKGROUND),
+                layerOneColor: getLayerColour(date, layers.ONE),
+                layerTwoColor: getLayerColour(date, layers.TWO),
+                layerThreeColor: getLayerColour(date, layers.THREE),
+                layerFourColor: getLayerColour(date, layers.FOUR),
+                layerFiveColor: getLayerColour(date, layers.FIVE)
+            })}, 10000
         );
     }
 
@@ -63,18 +78,49 @@ class Background extends Component {
         newTime.setHours(time.substr(0, time.indexOf(":")), time.substr(time.indexOf(":") + 1));
         this.setState(state => ({
             currentTime: newTime,
-            backgroundColor: getLayerColour(newTime, layers.BACKGROUND)
+            backgroundColor: getLayerColour(newTime, layers.BACKGROUND),
+            layerOneColor: getLayerColour(newTime, layers.ONE),
+            layerTwoColor: getLayerColour(newTime, layers.TWO),
+            layerThreeColor: getLayerColour(newTime, layers.THREE),
+            layerFourColor: getLayerColour(newTime, layers.FOUR),
+            layerFiveColor: getLayerColour(newTime, layers.FIVE)
         }))
     }
 
     render() {
         return(
             <div className="Background" style={{backgroundColor: this.state.backgroundColor}}>
-                <form>
+                <svg className="LayerOne" viewBox={layerPaths.one.viewBox} style={{fill: this.state.layerOneColor, zIndex:1}}>
+                    {
+                        layerPaths.one.paths.map((path)=><path d={path}></path>)
+                    }
+                </svg>
+                <svg className="LayerTwo" viewBox={layerPaths.two.viewBox} style={{fill: this.state.layerTwoColor, zIndex:2}}>
+                    {
+                        layerPaths.two.paths.map((path)=><path d={path}></path>)
+                    }
+                </svg>
+                <svg className="LayerThree" viewBox={layerPaths.three.viewBox} style={{fill: this.state.layerThreeColor, zIndex:3}}>
+                    {
+                        layerPaths.three.paths.map((path)=><path d={path}></path>)
+                    }
+                </svg>
+                <svg className="LayerFour" viewBox={layerPaths.four.viewBox} style={{fill: this.state.layerFourColor, zIndex:4}}>
+                    {
+                        layerPaths.four.paths.map((path)=><path d={path}></path>)
+                    }
+                </svg>
+                <svg className="LayerFive" viewBox={layerPaths.five.viewBox} style={{fill: this.state.layerFiveColor, zIndex:5}}>
+                    {
+                        layerPaths.five.paths.map((path)=><path d={path}></path>)
+                    }
+                </svg>
+                {/* TODO: Remove when done testing */}
+                {/* <form>
                     <input id="testTime" type="text"></input>
                     <input type="button" value="Submit" onClick={e => this.updateTime(document.getElementById("testTime").value)}></input>
-                </form>
-            </div>
+                </form> */}
+            </div> 
         );
     }
 }
