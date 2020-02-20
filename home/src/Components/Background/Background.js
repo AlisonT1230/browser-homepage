@@ -46,7 +46,8 @@ class Background extends Component {
             layerOneColor: getLayerColour(date, layers.ONE),
             layerTwoColor: getLayerColour(date, layers.TWO),
             layerThreeColor: getLayerColour(date, layers.THREE),
-            layerFourColor: getLayerColour(date, layers.FOUR)
+            layerFourColor: getLayerColour(date, layers.FOUR),
+            layerFiveColor: getLayerColour(date, layers.FIVE)
         };
     }
 
@@ -72,7 +73,8 @@ class Background extends Component {
             layerOneColor: getLayerColour(newTime, layers.ONE),
             layerTwoColor: getLayerColour(newTime, layers.TWO),
             layerThreeColor: getLayerColour(newTime, layers.THREE),
-            layerFourColor: getLayerColour(newTime, layers.FOUR)
+            layerFourColor: getLayerColour(newTime, layers.FOUR),
+            layerFiveColor: getLayerColour(newTime, layers.FIVE)
         }))
     }
 
@@ -97,6 +99,11 @@ class Background extends Component {
                 <svg className="LayerFour" viewBox={layerPaths.four.viewBox} style={{fill: this.state.layerFourColor, zIndex:4}}>
                     {
                         layerPaths.four.paths.map((path)=><path d={path}></path>)
+                    }
+                </svg>
+                <svg className="LayerFive" viewBox={layerPaths.five.viewBox} style={{fill: this.state.layerFiveColor, zIndex:5}}>
+                    {
+                        layerPaths.five.paths.map((path)=><path d={path}></path>)
                     }
                 </svg>
                 <form>
