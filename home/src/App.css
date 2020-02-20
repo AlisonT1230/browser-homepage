@@ -19,4 +19,5 @@
   left: 0;
   text-align: left;
   padding: 50px 80px;
+  z-index: 50;
 }

@@ -1,4 +1,5 @@
 h1 {
+    color: white;
     font-family: Roboto;
     font-weight: bold;
     margin-block-start: 10px;
@@ -6,6 +7,7 @@ h1 {
 }
 
 h2 {
+    color: white;
     font-family: Roboto;
     font-weight: normal;
     margin-block-start: 10px;
@@ -13,12 +15,14 @@ h2 {
 }
 
 p {
+    color: white;
     font-family: Roboto;
     margin-block-start: 5px;
     margin-block-end: 10px;
 }
 
 .fa.fa-map-marker{
+    color: white;
     width: 50px;
     display: inline-block;
 }
