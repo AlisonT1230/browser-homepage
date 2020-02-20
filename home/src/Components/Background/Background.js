@@ -80,17 +80,24 @@ class Background extends Component {
         return(
             <div className="Background" style={{backgroundColor: this.state.backgroundColor}}>
                 <svg className="LayerOne" viewBox={layerPaths.one.viewBox} style={{fill: this.state.layerOneColor, zIndex:1}}>
-                    <path d={layerPaths.one.path}></path>
+                    {
+                        layerPaths.one.paths.map((path)=><path d={path}></path>)
+                    }
                 </svg>
                 <svg className="LayerTwo" viewBox={layerPaths.two.viewBox} style={{fill: this.state.layerTwoColor, zIndex:2}}>
-                    <path d={layerPaths.two.path}></path>
+                    {
+                        layerPaths.two.paths.map((path)=><path d={path}></path>)
+                    }
                 </svg>
                 <svg className="LayerThree" viewBox={layerPaths.three.viewBox} style={{fill: this.state.layerThreeColor, zIndex:3}}>
-                    <path d={layerPaths.three.path}></path>
+                    {
+                        layerPaths.three.paths.map((path)=><path d={path}></path>)
+                    }
                 </svg>
                 <svg className="LayerFour" viewBox={layerPaths.four.viewBox} style={{fill: this.state.layerFourColor, zIndex:4}}>
-                    <path d={layerPaths.four.path}></path>
-                    <path d={layerPaths.four.path2}></path>
+                    {
+                        layerPaths.four.paths.map((path)=><path d={path}></path>)
+                    }
                 </svg>
                 <form>
                     <input id="testTime" type="text"></input>
