@@ -52,7 +52,7 @@ class GreetingInfo extends Component {
 	componentDidMount() {
 		document.getElementsByClassName("LocationName")[0].addEventListener('click', (e) => {
 			var cityIndex = this.state.cityIndex;
-			if(this.state.cityIndex == cities.length - 1) {
+			if(this.state.cityIndex === cities.length - 1) {
 				cityIndex = 0;
 			} else {
 				cityIndex++;
