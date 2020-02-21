@@ -9,7 +9,8 @@ class RainLayer extends Component {
         this.state = {
             layerId: props.layerId,
             isRaining: props.isRaining,
-            rainLocation: rainGraphics[props.layerId]
+            rainLocation: rainGraphics[props.layerId],
+            rainDrops: []
         }
     }
 
@@ -19,17 +20,28 @@ class RainLayer extends Component {
         const img = new Image();
         img.src = rainGraphics[this.state.layerId];
 
-        img.onload = () => {};
+        img.onload = () => { };
+
+        this.spawnInterval = setInterval(() => {
+            if (this.state.isRaining) {
+                var x = window.innerWidth * Math.random();
+                this.state.rainDrops.push([x, -100]);
+            }
+        }, 300);
 
         this.interval = setInterval(() => {
-            var x = window.innerWidth * Math.random();
-            
-            try{
-                ctx.drawImage(img, x, 10);
-            }catch (e) {
-                console.log(this.state.layerId + ": " + e);
+            var i = 0;
+            while (i < this.state.rainDrops.length) {
+                if (this.state.rainDrops[i][1] > canvas.height + 100) {
+                    this.state.rainDrops.splice(i, 1);
+                } else {
+                    ctx.clearRect(this.state.rainDrops[i][0], this.state.rainDrops[i][1] - 5, 14, 98)
+                    ctx.drawImage(img, this.state.rainDrops[i][0], this.state.rainDrops[i][1]);
+                    this.state.rainDrops[i][1] += 5;
+                    i++;
+                }
             }
-        }, 1000);
+        }, 10);
     }
 
     componentWillUnmount() {
@@ -37,9 +49,9 @@ class RainLayer extends Component {
     }
 
     render() {
-        return(
+        return (
             <div className={["RainLayer", "RainLayer_" + this.state.layerId].join(' ')}>
-                <canvas 
+                <canvas
                     width={window.innerWidth}
                     height={window.innerHeight}
                     ref="canvas"
